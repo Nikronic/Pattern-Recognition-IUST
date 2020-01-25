@@ -1,0 +1,1374 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PR\_HW3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{pattern-recognition---hw3---mohammad-doosti-lakhani---98722278}{%
+\section{Pattern Recognition - HW3 - Mohammad Doosti Lakhani -
+98722278}\label{pattern-recognition---hw3---mohammad-doosti-lakhani---98722278}}
+
+Index:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Import Libraries
+\item
+  Loading Data
+\item
+  Pretrained Feature Extraction
+\item
+  Feature Reduction
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    PCA
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      2D PCA
+    \item
+      Visualization
+    \item
+      3D PCA
+    \item
+      Visualization
+    \end{enumerate}
+  \item
+    TSN-E
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      2D TSN-E
+    \item
+      Visualization
+    \item
+      3D TSN-E
+    \item
+      Visualization
+    \end{enumerate}
+  \end{enumerate}
+\item
+  Train Test Split
+\item
+  Train Models
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    PCA
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      SVC Linear - PCA 2D
+    \item
+      SVC Linear - PCA 3D
+    \item
+      SVC RBF - PCA 2D
+    \item
+      SVC RBF - PCA 3D
+    \end{enumerate}
+  \item
+    TSN-E
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      SVC Linear - TSN-E 2D
+    \item
+      SVC Linear - TSN-E 3D
+    \item
+      SVC RBF - TSN-E 2D
+    \item
+      SVC RBF - TSN-E 3D
+    \end{enumerate}
+  \item
+    Fully Connected
+  \end{enumerate}
+\end{enumerate}
+
+    \hypertarget{import-libraries}{%
+\subsection{1 Import Libraries}\label{import-libraries}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{tensorflow\PYZus{}version} 1.x
+        
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pickle}
+        
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{PIL}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}\PY{p}{,} \PY{n}{LinearSVC}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{base}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k}{import} \PY{n}{TSNE}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{import} \PY{n}{ImageDataGenerator}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{Adam}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{EarlyStopping}\PY{p}{,} \PY{n}{ReduceLROnPlateau}\PY{p}{,} \PY{n}{ModelCheckpoint}\PY{p}{,} \PY{n}{LearningRateScheduler}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Conv2D}\PY{p}{,} \PY{n}{BatchNormalization}\PY{p}{,} \PY{n}{Activation}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{AveragePooling2D}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{Flatten}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{regularizers} \PY{k}{import} \PY{n}{l2}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{to\PYZus{}categorical}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{applications}\PY{n+nn}{.}\PY{n+nn}{vgg19} \PY{k}{import} \PY{n}{VGG19}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.svm.base module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.svm. Anything that cannot be imported from sklearn.svm is now part of the private API.
+  warnings.warn(message, FutureWarning)
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \hypertarget{loading-data}{%
+\subsection{2 Loading Data}\label{loading-data}}
+
+You need to put your data in the following structure:
+
+\begin{verbatim}
+data/train/
+        /class1
+        /class2
+        /...
+data/test/
+        /class1
+        /class2
+        /...
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{google}\PY{n+nn}{.}\PY{n+nn}{colab} \PY{k}{import} \PY{n}{drive}
+        \PY{n}{drive}\PY{o}{.}\PY{n}{mount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/content/drive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{o}{!}unrar x drive/My\PY{l+s+se}{\PYZbs{} }Drive/IUST\PYZhy{}PR/HW3/data.rar /content
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} loading data}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64}
+         \PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{img\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{224}\PY{p}{,} \PY{l+m+mi}{224}\PY{p}{)}
+         
+         \PY{n}{datagen} \PY{o}{=} \PY{n}{ImageDataGenerator}\PY{p}{(}\PY{p}{)}
+         \PY{n}{train\PYZus{}iterator} \PY{o}{=} \PY{n}{datagen}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}directory}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/train/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                                      \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} only for NN model}
+         \PY{n}{test\PYZus{}iterator} \PY{o}{=} \PY{n}{datagen}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}directory}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/test/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                                      \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{541}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}iterator}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{batchx} \PY{o}{=} \PY{n}{train\PYZus{}iterator}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{batchy} \PY{o}{=} \PY{n}{train\PYZus{}iterator}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{if} \PY{n}{batchx}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{batch\PYZus{}size}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{batchx}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{batchy}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{(}\PY{n}{idx}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{]} \PY{o}{=} \PY{n}{batchx}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{(}\PY{n}{idx}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{]} \PY{o}{=} \PY{n}{batchy}
+         
+         
+         \PY{n}{n\PYZus{}test} \PY{o}{=} \PY{l+m+mi}{31}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}test}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}iterator}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{batchy} \PY{o}{=} \PY{n}{test\PYZus{}iterator}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{if} \PY{n}{batchx}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{batch\PYZus{}size}\PY{p}{:}
+                 \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{batchy}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{n}{idx}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{:}\PY{p}{(}\PY{n}{idx}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{batch\PYZus{}size}\PY{p}{]} \PY{o}{=} \PY{n}{batchy}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Found 541 images belonging to 3 classes.
+Found 31 images belonging to 3 classes.
+(541, 224, 224, 3)
+(541, 3)
+(31, 3)
+
+    \end{Verbatim}
+
+    \hypertarget{pretrained-feature-extraction}{%
+\subsection{3 Pretrained Feature
+Extraction}\label{pretrained-feature-extraction}}
+
+When a CNN model is trained on a large dataset that can represent images
+similar to our custom dataset, has features that are common in first
+layers and more specific in the last layers. So we remove fully
+connected layers and use convolutional layers as the features extracted
+from ImageNet dataset where it is the superset of our dataset. These
+features even though are in low dimensional manner w.r.t. input images,
+they contain much more usefull information about images.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} feature extraction}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{VGG19}\PY{p}{(}\PY{n}{include\PYZus{}top}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imagenet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{input\PYZus{}tensor}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{,} \PY{l+m+mi}{224}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{features} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict\PYZus{}generator}\PY{p}{(}\PY{n}{train\PYZus{}iterator}\PY{p}{,} \PY{n}{steps}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{)}
+         \PY{n}{features\PYZus{}test} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict\PYZus{}generator}\PY{p}{(}\PY{n}{test\PYZus{}iterator}\PY{p}{,} \PY{n}{steps}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NN data train shape:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NN data test shape:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{features\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+NN data train shape: (541, 7, 7, 512)
+NN data test shape: (31, 7, 7, 512)
+
+    \end{Verbatim}
+
+    \hypertarget{feature-reduction}{%
+\subsection{4 Feature Reduction}\label{feature-reduction}}
+
+In this step, we have 7\emph{7}512 features to feed to our SVM models to
+train. But we want to reduce this info and use only 2 and 3 feature that
+represent our whole features.
+
+So we use PCA and TSN-E to reduce to 2 and 3 features.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  PCA
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    2D PCA
+  \item
+    Visualization
+  \item
+    3D PCA
+  \item
+    Visualization
+  \end{enumerate}
+\item
+  TSN-E
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    2D TSN-E
+  \item
+    Visualization
+  \item
+    3D TSN-E
+  \item
+    Visualization
+  \end{enumerate}
+\end{enumerate}
+
+    \hypertarget{a-pca}{%
+\subsubsection{4.A PCA}\label{a-pca}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  2D PCA
+\item
+  Visualization
+\item
+  3D PCA
+\item
+  Visualization
+\end{enumerate}
+
+    \hypertarget{a.a-2d-pca}{%
+\paragraph{4.A.a 2D PCA}\label{a.a-2d-pca}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} 2D PCA}
+         \PY{n}{pca\PYZus{}2d} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pca\PYZus{}2d}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pca\PYZus{}2d\PYZus{}features} \PY{o}{=} \PY{n}{pca\PYZus{}2d}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(541, 2)
+
+    \end{Verbatim}
+
+    \hypertarget{a.b-visualization}{%
+\paragraph{4.A.b Visualization}\label{a.b-visualization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{colors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        \PY{n}{x\PYZus{}} \PY{o}{=} \PY{n}{pca\PYZus{}2d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{pca\PYZus{}2d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{legend\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{color} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{area} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{colors}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{area}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{legend\PYZus{}}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        
+        \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(165,) (165,) (165,)
+(169,) (169,) (169,)
+(207,) (207,) (207,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{a.c-3d-pca}{%
+\paragraph{4.A.c 3D PCA}\label{a.c-3d-pca}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} 3D PCA}
+         \PY{n}{pca\PYZus{}3d} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{pca\PYZus{}3d}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pca\PYZus{}3d\PYZus{}features} \PY{o}{=} \PY{n}{pca\PYZus{}3d}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(541, 3)
+
+    \end{Verbatim}
+
+    \hypertarget{a.d-visualization}{%
+\paragraph{4.A.d Visualization}\label{a.d-visualization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{colors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}} \PY{o}{=} \PY{n}{pca\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{pca\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{z\PYZus{}} \PY{o}{=} \PY{n}{pca\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{legend\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{color} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{area} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{9} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{colors}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{z\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{area}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{legend\PYZus{}}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(165,) (165,) (165,)
+(169,) (169,) (169,)
+(207,) (207,) (207,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b-tsn-e}{%
+\subsubsection{4.B TSN-E}\label{b-tsn-e}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  2D TSN-E
+\item
+  Visualization
+\item
+  3D TSN-E
+\item
+  Visualization
+\end{enumerate}
+
+    \hypertarget{b.a-2d-tsn-e}{%
+\paragraph{4.B.a 2D TSN-E}\label{b.a-2d-tsn-e}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} TSNE 2D}
+         \PY{n}{tsne\PYZus{}2d} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}2d\PYZus{}features} \PY{o}{=} \PY{n}{tsne\PYZus{}2d}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(541, 2)
+
+    \end{Verbatim}
+
+    \hypertarget{b.b-visualization}{%
+\paragraph{4.B.b Visualization}\label{b.b-visualization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{colors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{x\PYZus{}} \PY{o}{=} \PY{n}{tsne\PYZus{}2d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{tsne\PYZus{}2d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{legend\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{color} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{area} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{colors}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{area}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{legend\PYZus{}}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(165,) (165,) (165,)
+(169,) (169,) (169,)
+(207,) (207,) (207,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b.c-3d-tsn-e}{%
+\paragraph{4.B.c 3D TSN-E}\label{b.c-3d-tsn-e}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} TSNE 3D}
+         \PY{n}{tsne\PYZus{}3d} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}3d\PYZus{}features} \PY{o}{=} \PY{n}{tsne\PYZus{}3d}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(541, 3)
+
+    \end{Verbatim}
+
+    \hypertarget{b.d-visualization}{%
+\paragraph{4.B.d Visualization}\label{b.d-visualization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{colors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}} \PY{o}{=} \PY{n}{tsne\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{tsne\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{z\PYZus{}} \PY{o}{=} \PY{n}{tsne\PYZus{}3d\PYZus{}features}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{legend\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{color} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{area} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{9} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{colors}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{z\PYZus{}}\PY{p}{[}\PY{n}{colors}\PY{o}{==}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{n}{area}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{legend\PYZus{}}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(165,) (165,) (165,)
+(169,) (169,) (169,)
+(207,) (207,) (207,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{train-test-split}{%
+\subsection{5 Train Test Split}\label{train-test-split}}
+
+For validating our trained model we need to separate a small proportion
+of our data to propose to our trained model where those have not been
+seen at all.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} train test split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}features}\PY{p}{,}
+                                                                                         \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                                                                                         \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}features}\PY{p}{,}
+                                                                                         \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                                                                                         \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}features}\PY{p}{,} 
+                                                                                             \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} 
+                                                                                             \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}features}\PY{p}{,} 
+                                                                                             \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} 
+                                                                                             \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 2D features train size:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 2D features test size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 3D features train size:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 3D features test size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TSNE 2D features train size:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TSNE 2D features test size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TSNE 3D features train size:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TSNE 3D features test size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA 2D features train size: (486, 2) ------ PCA 2D features test size (55, 2)
+PCA 3D features train size: (486, 3) ------ PCA 3D features test size (55, 3)
+TSNE 2D features train size: (486, 2) ------ TSNE 2D features test size (55, 2)
+TSNE 3D features train size: (486, 3) ------ TSNE 3D features test size (55, 3)
+
+    \end{Verbatim}
+
+    \hypertarget{train-models}{%
+\subsection{6 Train Models}\label{train-models}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  PCA 1. SVC Linear - PCA 2D 2. SVC Linear - PCA 3D 3. SVC RBF - PCA 2D
+  4. SVC RBF - PCA 3D
+\item
+  TSN-E
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    SVC Linear - TSN-E 2D
+  \item
+    SVC Linear - TSN-E 3D
+  \item
+    SVC RBF - TSN-E 2D
+  \item
+    SVC RBF - TSN-E 3D
+  \end{enumerate}
+\item
+  Fully Connected
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} SVM }
+        
+        \PY{k}{class} \PY{n+nc}{SVM\PYZus{}MODELS}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Enum of possible models}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{SVC} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{LINEAR\PYZus{}SVC} \PY{o}{=} \PY{l+m+mi}{2}
+        
+        
+        \PY{c+c1}{\PYZsh{} \PYZpc{}\PYZpc{} functions}
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{p}{:} \PY{n+nb}{int}\PY{p}{,} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{y}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n}{svc\PYZus{}kernel}\PY{p}{:} \PY{n+nb}{str} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{save}\PY{p}{:} \PY{n+nb}{bool} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                      \PY{n}{path}\PY{p}{:} \PY{n+nb}{str} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{base}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Trains a SVM model}
+        
+        \PY{l+s+sd}{    :param model\PYZus{}type: The kernel of SVM model (see `SVM\PYZus{}MODELS` class)}
+        \PY{l+s+sd}{    :param svc\PYZus{}kernel: The possible kernels for `SVC` model (It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’)}
+        \PY{l+s+sd}{    It will be ignored if `model\PYZus{}type = LINEAR\PYZus{}SVC`}
+        \PY{l+s+sd}{    :param x: Features in form of numpy ndarray}
+        \PY{l+s+sd}{    :param y: Labels in form of numpy ndarray}
+        \PY{l+s+sd}{    :param save: Whether save trained model on disc or not}
+        \PY{l+s+sd}{    :param path: Path to save fitted model}
+        \PY{l+s+sd}{    :param kwargs: A dictionary of other optional arguments of models in format of \PYZob{}\PYZsq{}arg\PYZus{}name\PYZsq{}: value\PYZcb{} (ex: \PYZob{}\PYZsq{}C\PYZsq{}: 2\PYZcb{})}
+        \PY{l+s+sd}{    :return:A trained VSM model}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{if} \PY{n}{model\PYZus{}type} \PY{o}{==} \PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{SVC}\PY{p}{:}
+                \PY{n}{model} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{n}{svc\PYZus{}kernel}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{model\PYZus{}type} \PY{o}{==} \PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{LINEAR\PYZus{}SVC}\PY{p}{:}
+                \PY{n}{model} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{Exception}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ is not valid}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n}{save}\PY{p}{:}
+                \PY{k}{if} \PY{n}{path} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n}{path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{n}{path} \PY{o}{+} \PY{n}{model}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}module\PYZus{}\PYZus{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \hypertarget{a-pca}{%
+\subsubsection{6.A PCA}\label{a-pca}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  SVC Linear - PCA 2D
+\item
+  SVC Linear - PCA 3D
+\item
+  SVC RBF - PCA 2D
+\item
+  SVC RBF - PCA 3D
+\end{enumerate}
+
+    \hypertarget{a.a-svc-linear---pca-2d}{%
+\paragraph{6.A.a SVC Linear - PCA 2D}\label{a.a-svc-linear---pca-2d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} SVC LINEAR PCA 2D}
+         \PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}linear} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{LINEAR\PYZus{}SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                    \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{200000}\PY{p}{,} \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/pca\PYZus{}2d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{multi\PYZus{}class}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 2D \PYZhy{} SVC LINEAR \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC LINEAR \PYZhy{} PCA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/\_base.py:947: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA 2D - SVC LINEAR - Test accuracy 0.9090909090909091
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{a.b-svc-linear---pca-3d}{%
+\paragraph{6.A.b SVC Linear - PCA 3D}\label{a.b-svc-linear---pca-3d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} SVC LINEAR PCA 3D}
+         \PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}linear} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{LINEAR\PYZus{}SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                    \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{200000}\PY{p}{,} \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/pca\PYZus{}3d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{multi\PYZus{}class}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 3D \PYZhy{} SVC LINEAR \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC LINEAR \PYZhy{} PCA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/\_base.py:947: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA 3D - SVC LINEAR - Test accuracy 0.9272727272727272
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{a.c-svc-rbf---pca-2d}{%
+\paragraph{6.A.c SVC RBF - PCA 2D}\label{a.c-svc-rbf---pca-2d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} SVC RBF PCA 2D}
+         \PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}rbf} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                 \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/pca\PYZus{}2d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{svc\PYZus{}kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 2D \PYZhy{} SVC RBF \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{pca\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC RBF \PYZhy{} PCA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA 2D - SVC RBF - Test accuracy 0.9090909090909091
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{a.d-svc-rbf---pca-3d}{%
+\paragraph{6.A.d SVC RBF - PCA 3D}\label{a.d-svc-rbf---pca-3d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} SVC RBF PCA 3D}
+         \PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}rbf} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                 \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/pca\PYZus{}3d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{svc\PYZus{}kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA 3D \PYZhy{} SVC RBF \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{pca\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC RBF \PYZhy{} PCA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA 3D - SVC RBF - Test accuracy 0.9272727272727272
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b-tsn-e}{%
+\subsubsection{6.B TSN-E}\label{b-tsn-e}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  SVC Linear - TSN-E 2D
+\item
+  SVC Linear - TSN-E 3D
+\item
+  SVC RBF - TSN-E 2D
+\item
+  SVC RBF - TSN-E 3D
+\end{enumerate}
+
+    \hypertarget{b.a-svc-linear---tsn-e-2d}{%
+\paragraph{6.B.a SVC Linear - TSN-E
+2D}\label{b.a-svc-linear---tsn-e-2d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} SVC LINEAR TSNE 2D}
+         \PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}linear} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{LINEAR\PYZus{}SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                    \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{200000}\PY{p}{,} \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/tsne\PYZus{}2d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{multi\PYZus{}class}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tsne 2D \PYZhy{} SVC LINEAR \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC LINEAR \PYZhy{} tsne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tsne 2D - SVC LINEAR - Test accuracy 0.7636363636363637
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b.b-svc-linear---tsn-e-3d}{%
+\paragraph{6.B.b SVC Linear - TSN-E
+3D}\label{b.b-svc-linear---tsn-e-3d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} SVC LINEAR TSNE 3D}
+         \PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}linear} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{LINEAR\PYZus{}SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                    \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{200000}\PY{p}{,} \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/tsne\PYZus{}3d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{multi\PYZus{}class}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tsne 3D \PYZhy{} SVC LINEAR \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC LINEAR \PYZhy{} tsne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/\_base.py:947: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tsne 3D - SVC LINEAR - Test accuracy 0.8727272727272727
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b.c-svc-rbf---tsn-e-2d}{%
+\paragraph{6.B.c SVC RBF - TSN-E 2D}\label{b.c-svc-rbf---tsn-e-2d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} SVC RBF tsne 2D}
+         \PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}rbf} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                 \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/tsne\PYZus{}2d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{svc\PYZus{}kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tsne 2D \PYZhy{} SVC RBF \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tsne\PYZus{}2d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{tsne\PYZus{}2d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC RBF \PYZhy{} tsne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tsne 2D - SVC RBF - Test accuracy 0.9272727272727272
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{b.d-svc-rbf---tsn-e-3d}{%
+\paragraph{6.B.d SVC RBF - TSN-E 3D}\label{b.d-svc-rbf---tsn-e-3d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} SVC RBF tsne 3D}
+         \PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}rbf} \PY{o}{=} \PY{n}{build\PYZus{}svm}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{n}{SVM\PYZus{}MODELS}\PY{o}{.}\PY{n}{SVC}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}train}\PY{p}{,}
+                                 \PY{n}{path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/tsne\PYZus{}3d\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{svc\PYZus{}kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tsne 3D \PYZhy{} SVC RBF \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}svc\PYZus{}rbf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tsne\PYZus{}3d\PYZus{}x\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{tsne\PYZus{}3d\PYZus{}y\PYZus{}test}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC RBF \PYZhy{} tsne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tsne 3D - SVC RBF - Test accuracy 0.8909090909090909
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{c-fully-connected}{%
+\subsubsection{6.C Fully Connected}\label{c-fully-connected}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{fc}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{print\PYZus{}summary}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+             \PY{n}{inputs} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{Flatten}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flatten}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fc1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fc2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predictions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{inputs}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{k}{if} \PY{n}{print\PYZus{}summary}\PY{p}{:}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{model}
+         
+         \PY{n}{fc\PYZus{}model} \PY{o}{=} \PY{n}{fc}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+         \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k}{def} \PY{n+nf}{prepare\PYZus{}directory}\PY{p}{(}\PY{n}{model\PYZus{}type}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vgg19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{save\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{getcwd}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{model\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZus{}model.}\PY{l+s+si}{\PYZob{}epoch:03d\PYZcb{}}\PY{l+s+s1}{.h5}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{model\PYZus{}type}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{)}
+             \PY{n}{filepath} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{n}{model\PYZus{}name}\PY{p}{)}
+             \PY{k}{return} \PY{n}{filepath}
+         
+         \PY{n}{filepath} \PY{o}{=} \PY{n}{prepare\PYZus{}directory}\PY{p}{(}\PY{p}{)}
+         \PY{n}{checkpoint} \PY{o}{=} \PY{n}{ModelCheckpoint}\PY{p}{(}\PY{n}{filepath}\PY{o}{=}\PY{n}{filepath}\PY{p}{,} \PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{save\PYZus{}best\PYZus{}only}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{callbacks} \PY{o}{=} \PY{p}{[}\PY{n}{checkpoint}\PY{p}{]}
+         
+         \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{y}\PY{p}{,} 
+                   \PY{n}{validation\PYZus{}split}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} 
+                   \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{workers}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{callbacks}\PY{o}{=}\PY{n}{callbacks}\PY{p}{)}
+         \PY{n}{score} \PY{o}{=} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{metrics\PYZus{}names}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{score}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model: "model\_5"
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_8 (InputLayer)         (None, 7, 7, 512)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten (Flatten)            (None, 25088)             0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fc1 (Dense)                  (None, 64)                1605696   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fc2 (Dense)                  (None, 64)                4160      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+predictions (Dense)          (None, 3)                 195       
+=================================================================
+Total params: 1,610,051
+Trainable params: 1,610,051
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Train on 486 samples, validate on 55 samples
+Epoch 1/50
+486/486 [==============================] - 1s 1ms/step - loss: 2.8259 - acc: 0.7469 - val\_loss: 0.7808 - val\_acc: 0.9273
+Epoch 2/50
+486/486 [==============================] - 0s 229us/step - loss: 0.5015 - acc: 0.9650 - val\_loss: 0.6306 - val\_acc: 0.9273
+Epoch 3/50
+486/486 [==============================] - 0s 233us/step - loss: 0.7303 - acc: 0.9403 - val\_loss: 0.8186 - val\_acc: 0.9091
+Epoch 4/50
+486/486 [==============================] - 0s 223us/step - loss: 0.3563 - acc: 0.9753 - val\_loss: 0.7602 - val\_acc: 0.9455
+Epoch 5/50
+486/486 [==============================] - 0s 236us/step - loss: 0.3539 - acc: 0.9733 - val\_loss: 1.4467 - val\_acc: 0.8909
+Epoch 6/50
+486/486 [==============================] - 0s 224us/step - loss: 0.5973 - acc: 0.9609 - val\_loss: 0.9528 - val\_acc: 0.9091
+Epoch 7/50
+486/486 [==============================] - 0s 238us/step - loss: 0.4245 - acc: 0.9671 - val\_loss: 0.2975 - val\_acc: 0.9818
+Epoch 8/50
+486/486 [==============================] - 0s 242us/step - loss: 0.3037 - acc: 0.9794 - val\_loss: 1.2844 - val\_acc: 0.9091
+Epoch 9/50
+486/486 [==============================] - 0s 243us/step - loss: 0.2898 - acc: 0.9774 - val\_loss: 0.5861 - val\_acc: 0.9636
+Epoch 10/50
+486/486 [==============================] - 0s 221us/step - loss: 0.2199 - acc: 0.9856 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 11/50
+486/486 [==============================] - 0s 218us/step - loss: 0.2319 - acc: 0.9835 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 12/50
+486/486 [==============================] - 0s 236us/step - loss: 0.4203 - acc: 0.9691 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 13/50
+486/486 [==============================] - 0s 227us/step - loss: 0.2003 - acc: 0.9877 - val\_loss: 0.7955 - val\_acc: 0.9273
+Epoch 14/50
+486/486 [==============================] - 0s 224us/step - loss: 0.2901 - acc: 0.9774 - val\_loss: 1.5582 - val\_acc: 0.8727
+Epoch 15/50
+486/486 [==============================] - 0s 238us/step - loss: 0.3266 - acc: 0.9774 - val\_loss: 0.6782 - val\_acc: 0.9455
+Epoch 16/50
+486/486 [==============================] - 0s 220us/step - loss: 0.1764 - acc: 0.9877 - val\_loss: 1.0911 - val\_acc: 0.9273
+Epoch 17/50
+486/486 [==============================] - 0s 222us/step - loss: 0.4236 - acc: 0.9712 - val\_loss: 1.4660 - val\_acc: 0.9091
+Epoch 18/50
+486/486 [==============================] - 0s 233us/step - loss: 0.1862 - acc: 0.9856 - val\_loss: 1.4653 - val\_acc: 0.9091
+Epoch 19/50
+486/486 [==============================] - 0s 225us/step - loss: 0.1648 - acc: 0.9897 - val\_loss: 1.6676 - val\_acc: 0.8727
+Epoch 20/50
+486/486 [==============================] - 0s 216us/step - loss: 0.1048 - acc: 0.9918 - val\_loss: 1.1745 - val\_acc: 0.9273
+Epoch 21/50
+486/486 [==============================] - 0s 224us/step - loss: 0.2432 - acc: 0.9815 - val\_loss: 0.9253 - val\_acc: 0.9273
+Epoch 22/50
+486/486 [==============================] - 0s 226us/step - loss: 0.1717 - acc: 0.9856 - val\_loss: 1.1728 - val\_acc: 0.9273
+Epoch 23/50
+486/486 [==============================] - 0s 232us/step - loss: 0.1682 - acc: 0.9877 - val\_loss: 1.3307 - val\_acc: 0.9091
+Epoch 24/50
+486/486 [==============================] - 0s 233us/step - loss: 0.2213 - acc: 0.9835 - val\_loss: 2.3918 - val\_acc: 0.8364
+Epoch 25/50
+486/486 [==============================] - 0s 223us/step - loss: 0.4356 - acc: 0.9712 - val\_loss: 1.7583 - val\_acc: 0.8909
+Epoch 26/50
+486/486 [==============================] - 0s 221us/step - loss: 0.1415 - acc: 0.9897 - val\_loss: 0.5938 - val\_acc: 0.9636
+Epoch 27/50
+486/486 [==============================] - 0s 248us/step - loss: 0.1024 - acc: 0.9918 - val\_loss: 0.7616 - val\_acc: 0.9455
+Epoch 28/50
+486/486 [==============================] - 0s 221us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 29/50
+486/486 [==============================] - 0s 214us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 30/50
+486/486 [==============================] - 0s 228us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 31/50
+486/486 [==============================] - 0s 220us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 32/50
+486/486 [==============================] - 0s 232us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 33/50
+486/486 [==============================] - 0s 243us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 34/50
+486/486 [==============================] - 0s 224us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 35/50
+486/486 [==============================] - 0s 221us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 36/50
+486/486 [==============================] - 0s 231us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 37/50
+486/486 [==============================] - 0s 223us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 38/50
+486/486 [==============================] - 0s 224us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 39/50
+486/486 [==============================] - 0s 232us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 40/50
+486/486 [==============================] - 0s 210us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 41/50
+486/486 [==============================] - 0s 213us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 42/50
+486/486 [==============================] - 0s 235us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 43/50
+486/486 [==============================] - 0s 225us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 44/50
+486/486 [==============================] - 0s 225us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 45/50
+486/486 [==============================] - 0s 238us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 46/50
+486/486 [==============================] - 0s 220us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 47/50
+486/486 [==============================] - 0s 210us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 48/50
+486/486 [==============================] - 0s 224us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 49/50
+486/486 [==============================] - 0s 218us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+Epoch 50/50
+486/486 [==============================] - 0s 223us/step - loss: 0.1327 - acc: 0.9918 - val\_loss: 0.8792 - val\_acc: 0.9455
+541/541 [==============================] - 0s 74us/step
+['loss', 'acc']
+[0.20855218491581207, 0.9870609971599966]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VGG 19 \PYZhy{} FC \PYZhy{} Test accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{features\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{features\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}cm}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FC model on VGG 19 Features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+31/31 [==============================] - 0s 252us/step
+VGG 19 - FC - Test accuracy 1.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
